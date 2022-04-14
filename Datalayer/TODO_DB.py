@@ -1,5 +1,6 @@
 import sqlite3
-from Models.ToDoItem import ToDoItem
+from ToDoItem import ToDoItem
+
 
 class DbHandler:
     dbName: str
@@ -14,7 +15,7 @@ class DbHandler:
         cur = con.cursor()
 
         # Create Table
-        cur.execute('''CREATE TABLE IF NOT EXISTS todos (title text, context text, isDone INTEGER)''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS todos (title TEXT, context TEXT, isDone INTEGER)''')
 
         con.commit()
         con.close()
@@ -24,18 +25,18 @@ class DbHandler:
             con = sqlite3.connect(self.dbName)
             cur = con.cursor()
 
-            cur.execute(f'INSERT INTO todos VALUES ({todo.title},{todo.content},{todo.isDone})')
+            cur.execute('INSERT INTO todos VALUES (?,?,?)',(todo.title, todo.content, todo.isDone))
             
             con.commit()
             con.close()
 
-    def removeTodoFromDB(self, todo: ToDoItem):
-        if (todo.todoID >= 0):
+    def removeTodoFromDB(self, todoID: int):
+        if (todoID >= 0):
             con = sqlite3.connect(self.dbName)
             cur = con.cursor()
 
-            cur = con.cursor(f'DELETE FROM todos WHERE rowid={todo.todoID};')
-            cur.execute()
+            cur = con.cursor()
+            cur.execute('DELETE FROM todos WHERE rowid=?', (str(todoID)))
 
             con.commit()
             con.close()
@@ -45,10 +46,24 @@ class DbHandler:
         cur = con.cursor()
 
         cur = con.cursor()
-        cur.execute("SELECT * FROM todos")
+        cur.execute("SELECT rowid, * FROM todos")
         query = cur.fetchall()
 
         con.commit()
         con.close()
 
+        # TODO: in Objekte umwandeln
+        return query
+
+    def get_todo_from_db(self, todoID: int):
+        con = sqlite3.connect(self.dbName)
+        cur = con.cursor()
+
+        cur = con.cursor()
+        cur.execute("SELECT rowid, * FROM todos WHERE rowid=?", (todoID))
+        query = cur.fetchall()
+
+        con.commit()
+        con.close()
+        # TODO: in Objekt umwandeln
         return query
