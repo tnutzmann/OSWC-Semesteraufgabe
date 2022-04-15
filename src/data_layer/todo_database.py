@@ -39,7 +39,7 @@ class Database:
         '''
         todo = []
         for i in query:
-            todo.append(Todo(i[1], i[2], i[3]))
+            todo.append(Todo(i[1], i[2], i[3], int(i[0])))
         return todo
 
     def add_todo(self, todo: Todo):
@@ -124,6 +124,4 @@ class Database:
 
         con.commit()
         con.close()
-        
-
         

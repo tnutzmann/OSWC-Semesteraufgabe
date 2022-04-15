@@ -22,12 +22,13 @@ db = db("foobar.db")
 #for i in bar:
 #    print(i.title)
 
-foo = db.get_todo(1)
+foo = db.get_todo(3)
 print(foo)
 
-foo.title = "Update Test"
+foo.title = "Update Test Nr 2"
+foo.is_done = True
 print(foo)
 db.update_todo(foo)
 
-foo = db.get_todo(1)
+foo = db.get_todo(3)
 print(foo)
