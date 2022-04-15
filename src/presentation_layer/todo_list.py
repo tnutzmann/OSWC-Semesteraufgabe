@@ -35,5 +35,3 @@ def print_all():
     print ("</div>")
     print ("</body>")
     print ("</html>")
-
-print_all()
