@@ -1,10 +1,8 @@
 '''
 Enthält alle Funktionen um todo Datenbank zu benutzen.
 '''
-
-from queue import Empty
 import sqlite3
-from todo import Todo
+from data_layer.todo import Todo
 
 
 class Database:
