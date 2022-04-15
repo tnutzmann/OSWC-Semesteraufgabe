@@ -2,6 +2,7 @@
 Enthält alle Funktionen um todo Datenbank zu benutzen.
 '''
 
+from queue import Empty
 import sqlite3
 from todo import Todo
 
@@ -91,7 +92,7 @@ class Database:
 
     def get_todo(self, todo_id: int):
         '''
-        Git ein Ein Todo Item anhand seiner Id zurück.
+        Gibt ein Todo Item anhand seiner Id zurück.
         :param int todo_id: Die Id des Todo Objekts.
         :return todo_list: Gibt ein Objekt der Klasse.
         '''
@@ -107,3 +108,22 @@ class Database:
 
         todo = self.query_to_todo(query)[0]
         return todo
+
+    def update_todo(self, todo: Todo):
+        '''
+        Verändert in bestehendes todo item.
+        :param int todo_id: Die Id des Todo Objekts.
+        :return todo_list: Gibt ein Objekt der Klasse.
+        '''
+        con = sqlite3.connect(self.db_name)
+        cur = con.cursor()
+
+        cur = con.cursor()
+        cur.execute("UPDATE todos SET title = ?, content = ?, is_done = ? WHERE rowid=?", (todo.title, todo.content, todo.is_done, str(todo.todo_id)))
+        query = cur.fetchall()
+
+        con.commit()
+        con.close()
+        
+
+        
