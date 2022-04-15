@@ -1,8 +1,8 @@
-#!/usr/bin/python3
 import os, sys
-currentdir = os.path.dirname(os.path.realpath(__file__))
-parentdir = os.path.dirname(currentdir)
-sys.path.append(parentdir)
+
+#currentdir = os.path.dirname(os.path.realpath(__file__))
+#parentdir = os.path.dirname(currentdir)
+#sys.path.append(parentdir)
 
 from data_layer.todo import Todo
 from data_layer.todo_database import Database
@@ -24,7 +24,6 @@ def all_todos_to_html():
 
 # Just for testing
 def print_all():
-    print ("Content-type:text/html\n")
     print ("<html>")
     print ("<head>")
     print ("<title>TODO List</title>")
