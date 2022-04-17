@@ -22,3 +22,7 @@ Commad um Ergebnis zu testen:
 Um im Docker Fehler zu suchen folgendes ausführen: `sudo docker run -it cgi bash`
 Besonders hilfreich für debuging war `/usr/sbin/apache2` auszuführen.
 Und `docker ps` braucht man auch sehr oft.
+
+## Unittest
+
+Im Repo Ordner: `python3 -m tests.test_todo_database`
