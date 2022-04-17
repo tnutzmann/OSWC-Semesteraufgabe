@@ -1,33 +1,43 @@
 '''
-todo_database: Contains all the functions to use todo database and the Todo class, this contains all the necessary attributes for a Todo card.
+todo_database: Contains all the functions to
+use todo database and the Todo class, this
+contains all the necessary attributes for
+a Todo card.
 '''
 import sqlite3
 import re
 
-class Todo:
-    '''Class for TODO-Tickets'''
 
-    def __init__(self, title, content, is_done = 0, id = -1, color = "yellow"):
+class Todo:
+    '''
+    Class for TODO-Tickets
+    '''
+
+    #  pylint: disable=too-many-arguments
+    def __init__(self, title, content, is_done=0, card_id=-1, color="yellow"):
         self.__title = title
         self.__content = content
         self.__is_done = is_done
-        self.__id = id # id is set by the Database
+        self.__card_id = card_id  # card_id is set by the Database
         self.__color = color
 
     def __str__(self):
-        return str(self.__id) + '\n' + \
+        return str(self.__card_id) + '\n' + \
                self.__title + '\n' + \
                self.__content + '\n' + \
                self.__color + '\n' + \
                '\nDone: ' + str(self.__is_done)
 
     def is_done_to_str(self):
+        '''
+        :return the String od is_done
+        '''
         switcher = {
             0: 'TO DO',
             1: 'DOING',
             2: 'DONE',
         }
-        print(switcher.get(self.__is_done, 'Number must be between 0 and 2.'))
+        return switcher.get(self.__is_done, 'Number must be between 0 and 2.')
 
     @property
     def title(self):
@@ -102,12 +112,11 @@ class Todo:
             int(is_done)
         except NameError:
             raise TypeError('is_done must be an integer.') from NameError
-        if is_done > 2:
-            raise ValueError('is_done cannot higer then 2.')
-        elif is_done < 0:
-            raise ValueError('is_done must be an positive number.')
-        else:
-            self.__is_done = int(is_done)
+
+        if -1 <= is_done <= 3:
+            raise ValueError('is_done must be between 0 and 2 ')
+
+        self.__is_done = int(is_done)
 
     @is_done.deleter
     def is_done(self):
@@ -117,29 +126,29 @@ class Todo:
         del self.is_done
 
     @property
-    def id(self):
+    def card_id(self):
         '''
-        Getter for id
+        Getter for card_id
         '''
-        return self.__id
+        return self.__card_id
 
-    @id.setter
-    def id(self, id):
+    @card_id.setter
+    def card_id(self, card_id):
         '''
-        Setter for id
+        Setter for card_id
         '''
         try:
-            int(id)
+            int(card_id)
         except NameError:
-            raise TypeError('id must be an Integer.') from NameError
-        self.__title = int(id)
+            raise TypeError('card_id must be an Integer.') from NameError
+        self.__title = int(card_id)
 
-    @id.deleter
-    def id(self):
+    @card_id.deleter
+    def card_id(self):
         '''
-        Deleter for id
+        Deleter for card_id
         '''
-        del self.__id
+        del self.__card_id
 
     @property
     def color(self):
@@ -174,6 +183,7 @@ class Todo:
         '''
         del self.__color
 
+
 class Database:
     '''
     Class to use the database.
@@ -197,7 +207,8 @@ class Database:
         con.commit()
         con.close()
 
-    def query_to_todo(self, query: list):
+    @classmethod
+    def query_to_todo(cls, query: list):
         '''
         Wandelt eine Query list in ein Objekt.
         :param list query: Liste aus einer Datenbank abfrage.
@@ -213,30 +224,32 @@ class Database:
         Fügt ein Todo Item Objekt der Datenbank hinzu.
         :param: todo todo: Ein Objekt der Klasse todo.
         '''
-        if (todo.id == -1):
+        if (todo.card_id == -1):
             con = sqlite3.connect(self.__db_name)
             cur = con.cursor()
 
             cur.execute('INSERT INTO todos VALUES (?,?,?,?)',
-             (todo.title, todo.content, todo.is_done, todo.color))
+                        (todo.title, todo.content, todo.is_done, todo.color))
 
             con.commit()
             con.close()
 
-    def remove_todo(self, id: int):
+    def remove_todo(self, card_id: int):
         '''
         Löscht Todo aus der Tabelle anhand der Id eines Todo Items.
         :param: int id: Die Id des Todo Item Objekts.
         '''
-        if (id >= 0):
+        if (card_id >= 0):
             con = sqlite3.connect(self.__db_name)
             cur = con.cursor()
 
             cur = con.cursor()
-            cur.execute('DELETE FROM todos WHERE rowid=?', (str(id)))
+            cur.execute('DELETE FROM todos WHERE rowid=?', (str(card_id)))
 
             con.commit()
             con.close()
+        else:
+            raise ValueError('Id is to low.')
 
     def get_all_todos(self):
         '''
@@ -256,7 +269,7 @@ class Database:
         todo = self.query_to_todo(query)
         return todo
 
-    def get_todo(self, id: int):
+    def get_todo(self, card_id: int):
         '''
         Gibt ein Todo Item anhand seiner Id zurück.
         :param int id: Die Id des Todo Objekts.
@@ -266,7 +279,7 @@ class Database:
         cur = con.cursor()
 
         cur = con.cursor()
-        cur.execute("SELECT rowid, * FROM todos WHERE rowid=?", (str(id)))
+        cur.execute("SELECT rowid, * FROM todos WHERE rowid=?", (str(card_id)))
         query = cur.fetchall()
 
         con.commit()
@@ -285,8 +298,17 @@ class Database:
         cur = con.cursor()
 
         cur = con.cursor()
-        cur.execute("UPDATE todos SET title = ?, content = ?, is_done = ?, color = ? WHERE rowid=?", (todo.title, todo.content, todo.is_done, todo.color, str(todo.id)))
-        query = cur.fetchall()
+        cur.execute("UPDATE todos \
+                    SET title = ?, \
+                    content = ?, \
+                    is_done = ?, \
+                    color = ? \
+                    WHERE rowid=?",
+                    (todo.title,
+                     todo.content,
+                     todo.is_done,
+                     todo.color,
+                     str(todo.card_id)))
 
         con.commit()
         con.close()
@@ -308,7 +330,7 @@ class Database:
         except SyntaxError:
             raise TypeError('db_name must be an String.') from SyntaxError
 
-        if re.match('.*\.(?:db)', db_name, re.VERBOSE):
+        if re.match(r'.*\.(?:db)', db_name, re.VERBOSE):
             self.__db_name = db_name
         else:
             raise ValueError('db_name must end with .db')

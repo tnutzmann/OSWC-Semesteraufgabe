@@ -10,7 +10,7 @@ from data_layer.todo_database import Database
 def todo_to_html(todo: Todo):
     return f'''
     <div>
-        <h2>{todo.id}. {todo.title}</h2>
+        <h2>{todo.card_id}. {todo.title}</h2>
         <p>{todo.content}</p>
     </div>'''
 
