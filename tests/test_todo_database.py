@@ -10,14 +10,14 @@ class TestTodo(unittest.TestCase):
         self.assertAlmostEqual(todo.title, 'Test1')
         self.assertAlmostEqual(todo.content, 'Das ist ein erster Test')
         self.assertAlmostEqual(todo.is_done, True)
-        self.assertAlmostEqual(todo.id, -1)
+        self.assertAlmostEqual(todo.card_id, -1)
         self.assertAlmostEqual(todo.color, 'yellow')
         
         todo2 = Todo('Test2', 'Das ist ein zweiter Test', True, 15)
         self.assertAlmostEqual(todo2.title, 'Test2')
         self.assertAlmostEqual(todo2.content, 'Das ist ein zweiter Test')
         self.assertAlmostEqual(todo2.is_done, True)
-        self.assertAlmostEqual(todo2.id, 15)
+        self.assertAlmostEqual(todo2.card_id, 15)
 
     def test_title_property(self):
         todo = Todo('titel', 'content')
@@ -37,7 +37,7 @@ class TestTodo(unittest.TestCase):
         self.assertAlmostEqual(db_todo.title, 'Test2')
         self.assertAlmostEqual(db_todo.content, 'Das ist ein zweiter Test')
         self.assertAlmostEqual(db_todo.is_done, True)
-        self.assertAlmostEqual(db_todo.id, 2)
+        self.assertAlmostEqual(db_todo.card_id, 2)
 
 if __name__ == '__main__':
     unittest.main()
