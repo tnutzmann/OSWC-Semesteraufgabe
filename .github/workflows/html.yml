@@ -1,0 +1,16 @@
+name: html tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  html:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - run: python3 src/index.cgi | sed -e '1d' > src/index.html
+      - uses: Cyb3r-Jak3/html5validator-action@master
+        with:
+          root: src/
+          css: true
