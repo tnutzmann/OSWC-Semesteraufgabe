@@ -1,10 +1,6 @@
-import os, sys
+import cgi
 
-#currentdir = os.path.dirname(os.path.realpath(__file__))
-#parentdir = os.path.dirname(currentdir)
-#sys.path.append(parentdir)
-
-from data_layer.todo import Todo
+from data_layer.todo_database import Todo
 from data_layer.todo_database import Database
 
 def todo_to_html(todo: Todo):
@@ -15,7 +11,7 @@ def todo_to_html(todo: Todo):
     </div>'''
 
 def all_todos_to_html():
-    db = Database('foobar.db')
+    db = Database('todo.db')
     todos = db.get_all_todos()
     todos_html = ""
     for t in todos:
@@ -24,7 +20,6 @@ def all_todos_to_html():
 
 # Just for testing
 def print_all():
-    print ("<html>")
     print ("<head>")
     print ("<title>TODO List</title>")
     print ("</head>")
@@ -34,4 +29,11 @@ def print_all():
     print (all_todos_to_html())
     print ("</div>")
     print ("</body>")
+
+def draw(form: cgi.FieldStorage):
+    print('Content-Type:text/html\n')
+    print('<!DOCTYPE html>')
+    print('<html lang="de">')
+    print(form.getvalue('action')) #zum testen wird später entfernt
+    print_all()
     print ("</html>")
