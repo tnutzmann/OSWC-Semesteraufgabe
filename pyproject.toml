@@ -1,3 +1,8 @@
+[metadata]
+name = OSWC
+version = 0.0.1
+description = Semesteraufgabe
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
