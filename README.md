@@ -16,7 +16,7 @@ Zum bauen wird folgender Commad benutzt (Im Verzeichnis mit dem Dockerfile): `su
 
 ### Testing
 Commad um Ergebnis zu testen:
-`sudo docker run -dit -p 8080:80 cgi; firefox http://localhost:8080/cgi/presentation_layer/index.cgi`
+`sudo docker run -dit -p 8080:80 cgi; firefox http://localhost:8080/cgi/index.cgi`
 
 ### Debuging 
 Um im Docker Fehler zu suchen folgendes ausführen: `sudo docker run -it cgi bash`
