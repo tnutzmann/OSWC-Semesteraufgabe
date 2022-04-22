@@ -5,7 +5,17 @@ on:
   - pull_request
 
 jobs:
-  test:
+  html_test:  
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - run: python3 src/index.cgi | sed -e '1d' > src/index.html
+      - uses: Cyb3r-Jak3/html5validator-action@master
+        with:
+          root: src/
+          css: true
+
+  python_tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -13,14 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Create HTML5 Site
-      run: |
-        python3 src/index.cgi | sed -e '1d' > src/index.html
-    - name: HTML5 Validator
-      uses: Cyb3r-Jak3/html5validator-action@master
-      with:
-        root: src/
-        css: true
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -31,4 +34,3 @@ jobs:
         pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
-      
