@@ -12,7 +12,7 @@ RUN a2enconf cgi-enabled
 # Kopieren von Source Code
 RUN mkdir -p /var/www/html/cgi
 ADD src /var/www/html/cgi
-RUN chmod 705 /var/www/html/cgi/presentation_layer/index.cgi
+RUN chmod 705 /var/www/html/cgi/index.cgi
 
 # Apache Scheiß
 ENV APACHE_RUN_DIR /var/lib/apache/runtime
