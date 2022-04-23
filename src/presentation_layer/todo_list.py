@@ -26,6 +26,8 @@ def print_todo_list():
     print ("</div>")
 
 def perform_action_create(form: cgi.FieldStorage):
+        db = Database('todo.db')
+
         title = form.getvalue('title')
         content = form.getvalue('content')
         color = form.getvalue('color')
@@ -35,21 +37,45 @@ def perform_action_create(form: cgi.FieldStorage):
         else:
             todo = Todo(title, content)
         
-        db = Database('todo.db')
         db.add_todo(todo)
+
+def perform_action_delete(form: cgi.FieldStorage):
+    db = Database('todo.db')
+    todo_id = form.getvalue('id')
+    db.remove_todo(todo_id)
+
+def perform_action_update(form: cgi.FieldStorage):
+    db = Database('todo.db')
+    todo_id = form.getvalue('id')
+
+    todo: Todo = db.get_todo(todo_id)
+
+    todo.title = form.getvalue('title')
+    todo.content = form.getvalue('content')
+    todo.color = form.getvalue('color')
+
+    db.update_todo(todo)
+
+def perform_action_shift(form: cgi.FieldStorage):
+    db = Database('todo.db')
+    todo_id = form.getvalue('id')
+    todo: Todo = db.get_todo(todo_id)
+
+    if todo.is_done < 2:
+        todo.is_done += 1
+        db.update_todo(todo)
 
 def perform_action(form: cgi.FieldStorage):
     action = form.getvalue('action')
     match action:
         case 'create':
-            return 'create'
+            perform_action_create(form)
         case 'delete':
-            return 'delete'
+            perform_action_delete(form)
         case 'update':
-            return 'update'
+            perform_action_update(form)
         case 'shift':
-            return 'shift'
-
+            perform_action_shift(form)
 
 def draw(form: cgi.FieldStorage):
     perform_action(form)
