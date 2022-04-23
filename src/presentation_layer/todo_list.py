@@ -20,20 +20,21 @@ def all_todos_to_html():
 
 # Just for testing
 def print_all():
-    print ("<head>")
-    print ("<title>TODO List</title>")
-    print ("</head>")
-    print ("<body>")
     print ("<h1>TODO List</h1>")
     print ("<div>")
     print (all_todos_to_html())
     print ("</div>")
-    print ("</body>")
 
 def draw(form: cgi.FieldStorage):
     print('Content-Type:text/html\n')
     print('<!DOCTYPE html>')
     print('<html lang="de">')
-    print(form.getvalue('action')) #zum testen wird später entfernt
+    print ("<head>")
+    print ("<title>TODO List</title>")
+    print ("</head>")
+    print ("<body>")
+    
     print_all()
+
+    print ("</body>")
     print ("</html>")
