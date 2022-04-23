@@ -12,9 +12,8 @@ def todo_to_html(todo: Todo):
     '''
     return f'''
     <div class="todo {todo.color} state_{todo.is_done}" id="todo_{todo.card_id}">
-        <h4> #{todo.card_id} </h4>
-        <h2>{todo.title}</h2>
-        <p>{todo.content}</p>
+        <h2 class="todo_content">#{todo.card_id} {todo.title}</h2>
+        <p class="todo_content">{todo.content}</p>
     </div>'''
 
 def all_todos_to_html():
@@ -34,7 +33,7 @@ def print_todo_list():
     '''
     Print all Tddo Cards in Html
     '''
-    print ("<h1>TODO List</h1>")
+    #print ("<h1>TODO List</h1>")
     print ("<div>")
     print (all_todos_to_html())
     print ("</div>")
@@ -122,16 +121,18 @@ def draw(form: cgi.FieldStorage):
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="presentation_layer/css/mystyle.css">
+        <link rel="stylesheet" href="presentation_layer/css/tonys_style.css">
         <title>TODO List</title>
     </head>
     
     <body>
+        <div class="todo_list">
     ''')
 
     print_todo_list()
 
     print ('''
+        </div>
     </body>
     </html>
     ''')
