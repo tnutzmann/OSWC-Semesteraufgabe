@@ -65,17 +65,29 @@ def perform_action_shift(form: cgi.FieldStorage):
         todo.is_done += 1
         db.update_todo(todo)
 
+# das geht erst ab Python 3.10!!!
+#def perform_action(form: cgi.FieldStorage):
+#    action = form.getvalue('action')
+#    match action:
+#        case 'create':
+#            perform_action_create(form)
+#        case 'delete':
+#            perform_action_delete(form)
+#        case 'update':
+#            perform_action_update(form)
+#        case 'shift':
+#            perform_action_shift(form)
+
 def perform_action(form: cgi.FieldStorage):
     action = form.getvalue('action')
-    match action:
-        case 'create':
-            perform_action_create(form)
-        case 'delete':
-            perform_action_delete(form)
-        case 'update':
-            perform_action_update(form)
-        case 'shift':
-            perform_action_shift(form)
+    if action == 'create':
+        perform_action_create(form)
+    if action == 'delete':
+        perform_action_delete(form)
+    if action == 'update':
+        perform_action_update(form)
+    if action == 'shift':
+        perform_action_shift(form)
 
 def draw(form: cgi.FieldStorage):
     perform_action(form)
