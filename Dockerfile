@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:buster 
 
 # Updaten und Apache und Python installieren
 RUN apt update
