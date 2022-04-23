@@ -1,3 +1,7 @@
+[project]
+name = "OSWC"
+version = "0.0.1"
+
 [build-system]
-requires = ["setuptools>=42.0", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
