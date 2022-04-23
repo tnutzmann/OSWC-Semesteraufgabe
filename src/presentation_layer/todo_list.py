@@ -5,8 +5,8 @@ from data_layer.todo_database import Database
 
 def todo_to_html(todo: Todo):
     return f'''
-    <div>
-        <h2>{todo.card_id}. {todo.title}</h2>
+    <div class="todo {todo.color} state_{todo.is_done}" id="todo_{todo.card_id}">
+        <h2>{todo.title}</h2>
         <p>{todo.content}</p>
     </div>'''
 
