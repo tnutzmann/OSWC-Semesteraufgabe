@@ -12,7 +12,7 @@ def todo_to_html(todo: Todo):
     '''
     return f'''
     <div class="todo {todo.color} state_{todo.is_done}" id="todo_{todo.card_id}">
-        <h2 class="todo_content">#{todo.card_id} {todo.title}</h2>
+        <h2 class="todo_header">#{todo.card_id} {todo.title}</h2>
         <p class="todo_content">{todo.content}</p>
     </div>'''
 
