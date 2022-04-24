@@ -25,6 +25,15 @@ body {
     justify-content: center;
 }
 
+.todo_kanban {
+    margin: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-direction: row;
+}
+
 .todo {
     color: #000;
     display: block;
