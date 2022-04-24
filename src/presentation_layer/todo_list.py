@@ -3,6 +3,10 @@ Contains all the functions that are necessary to create the website.
 '''
 
 import cgi
+import logging
+
+logging.basicConfig( level=logging.DEBUG, filename='todo_cgi.log')
+
 from data_layer.todo_database import Todo
 from data_layer.todo_database import Database
 
@@ -140,22 +144,28 @@ def perform_action(form: cgi.FieldStorage):
     '''
     Action from URL validation
     '''
-    action = form.getvalue('action')
+    logging.debug('vor perform action, action getValue')
+    action = str(form.getvalue('action'))
+    logging.debug('nach perform action, action getValue')
+    logging.debug(f'action = {action}')
 
     if action == 'create':
+        logging.debug('action == create')
         perform_action_create(form)
-    if action == 'delete':
+    elif action == 'delete':
         perform_action_delete(form)
-    if action == 'update':
+    elif action == 'update':
         perform_action_update(form)
-    if action == 'shift':
+    elif action == 'shift':
         perform_action_shift(form)
 
 def draw(form: cgi.FieldStorage):
     '''
     Assemble the html document
     '''
+    logging.debug('vor perform action')
     perform_action(form)
+    logging.debug('nach perform action')
     # For the cgi
     print('Content-Type:text/html\n')
 

@@ -1,0 +1,5 @@
+DEBUG:root:vor perform action
+DEBUG:root:vor perform action, action getValue
+DEBUG:root:nach perform action, action getValue
+DEBUG:root:action = None
+DEBUG:root:nach perform action

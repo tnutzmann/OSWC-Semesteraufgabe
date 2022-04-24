@@ -13,6 +13,8 @@ RUN a2enconf cgi-enabled
 RUN mkdir -p /var/www/html/cgi
 ADD src /var/www/html/cgi
 RUN chmod 705 /var/www/html/cgi/index.cgi
+RUN chmod 666 /var/www/html/cgi/todo_cgi.log
+RUN chmod 666 /var/www/html/cgi/todo.db
 
 # Apache Scheiß
 ENV APACHE_RUN_DIR /var/lib/apache/runtime
