@@ -97,10 +97,7 @@ def perform_action_create(form: cgi.FieldStorage):
     content = form.getvalue('content')
     color = form.getvalue('color')
 
-    if color != 'None':
-        todo = Todo(title, content, color=color)
-    else:
-        todo = Todo(title, content)
+    todo = Todo(title, content, color)
 
     database.add_todo(todo)
 
