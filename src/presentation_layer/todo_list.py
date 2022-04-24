@@ -64,16 +64,19 @@ def print_todo_kanban():
     kanban = '<div class="todo_kanban">'
 
     kanban += '<div class="todo_kanban_column todo_kanban_column_left">'
+    kanban += '<h1 class="todo_kanban_column_header">To do</h1>'
     for todo in is_done_0:
         kanban += todo_to_html(todo)
     kanban += '</div>'
 
     kanban += '<div class="todo_kanban_column todo_kanban_column_center">'
+    kanban += '<h1 class="todo_kanban_column_header">Active</h1>'
     for todo in is_done_1:
         kanban += todo_to_html(todo)
     kanban += '</div>'
 
     kanban += '<div class="todo_kanban_column todo_kanban_column_right">'
+    kanban += '<h1 class="todo_kanban_column_header">Done</h1>'
     for todo in is_done_2:
         kanban += todo_to_html(todo)
     kanban += '</div>'

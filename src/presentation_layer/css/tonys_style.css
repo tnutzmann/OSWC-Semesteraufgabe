@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
+
 body {
     margin: 1rem auto;
-    background: #666;
-    color: #fff;
+    background: #666666;
+    color: #ffffff;
+    font-family: 'Square Peg', cursive;
 }
 
 * {
@@ -25,15 +28,6 @@ body {
     justify-content: center;
 }
 
-.todo_kanban {
-    margin: 5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-    flex-direction: row;
-}
-
 .todo {
     color: #000;
     display: block;
@@ -43,6 +37,25 @@ body {
     transition: transform .15s linear;
     transform: rotate(6deg);
     position: relative;
+}
+
+.todo_kanban {
+    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+.todo_kanban_column {
+    padding: 1rem;
+    background-color: #444444;
+}
+
+.todo_kanban_column_header {
+    margin: 1rem;
+    font-size: 2rem;
 }
 
 .todo:hover, .todo:focus {
