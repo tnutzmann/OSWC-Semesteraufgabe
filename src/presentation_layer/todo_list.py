@@ -174,6 +174,20 @@ def draw(form: cgi.FieldStorage):
     </head>
     
     <body>
+        <div class="actions_container popup">
+            <form action="/cgi/index.cgi" class="todo_create_form">
+                <input type="text" placeholder="Title" name="title" required>
+                <input type="text" placeholder="Content" name="content" required>
+                <select id="colors" name="color">
+                    <option value="yellow">yellow</option>
+                    <option value="green">green</option>
+                    <option value="orange">orange</option>
+                    <option value="purple">purple</option>
+                    <option value="rosa">rosa</option>
+                </select>
+                <input type="submit" class="button" name="action" value="create">
+            </form>
+        </div>
     ''')
 
     print(print_todo_kanban())
