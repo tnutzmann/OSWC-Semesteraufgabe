@@ -34,9 +34,54 @@ def print_todo_list():
     Print all Tddo Cards in Html
     '''
     #print ("<h1>TODO List</h1>")
-    print ("<div>")
+    print ('<div class="todo_list">')
     print (all_todos_to_html())
     print ("</div>")
+
+def print_todo_kanban():
+    '''
+    Print all Tddo Cards in Kanban
+    '''
+    database = Database('todo.db')
+
+    todos = database.get_all_todos()
+
+    # Listen für die Kanban Spalten
+    is_done_0 = []
+    is_done_1 = []
+    is_done_2 = []
+
+    # Alle Todos in die Spalten sortieren
+    for todo in todos:
+        if todo.is_done == 0:
+            is_done_0.append(todo)
+        elif todo.is_done == 1:
+            is_done_1.append(todo)
+        else:
+            is_done_2.append(todo)
+    
+    # Alle Spalten in html umwandeln
+    kanban = '<div class="todo_kanban">'
+
+    kanban += '<div class="todo_kanban_column todo_kanban_column_left">'
+    for todo in is_done_0:
+        kanban += todo_to_html(todo)
+    kanban += '</div>'
+
+    kanban += '<div class="todo_kanban_column todo_kanban_column_center">'
+    for todo in is_done_1:
+        kanban += todo_to_html(todo)
+    kanban += '</div>'
+
+    kanban += '<div class="todo_kanban_column todo_kanban_column_right">'
+    for todo in is_done_2:
+        kanban += todo_to_html(todo)
+    kanban += '</div>'
+
+    kanban += '</div>'
+
+    return kanban
+
 
 def perform_action_create(form: cgi.FieldStorage):
     '''
@@ -126,13 +171,12 @@ def draw(form: cgi.FieldStorage):
     </head>
     
     <body>
-        <div class="todo_list">
     ''')
 
-    print_todo_list()
+    print(print_todo_kanban())
+    #print_todo_list()
 
     print ('''
-        </div>
     </body>
     </html>
     ''')
