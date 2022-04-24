@@ -4,15 +4,16 @@ Contains all the functions that are necessary to create the website.
 
 import cgi
 import logging
-
-logging.basicConfig( level=logging.DEBUG, filename='todo_cgi.log')
-
 from data_layer.todo_database import Todo
 from data_layer.todo_database import Database
+
+logging.basicConfig( level=logging.DEBUG, filename='todo_cgi.log')
 
 def todo_to_html(todo: Todo):
     '''
    Create the Todo Card Div.
+   :param: Todo Item
+   :return: f-string todo as html div tag
     '''
     return f'''
     <div class="todo {todo.color} state_{todo.is_done}" id="todo_{todo.card_id}">
@@ -23,6 +24,7 @@ def todo_to_html(todo: Todo):
 def all_todos_to_html():
     '''
     Create all Todo Cards
+    :return: all todos as html
     '''
     database = Database('todo.db')
 
@@ -37,14 +39,13 @@ def print_todo_list():
     '''
     Print all Tddo Cards in Html
     '''
-    #print ("<h1>TODO List</h1>")
     print ('<div class="todo_list">')
     print (all_todos_to_html())
     print ("</div>")
 
 def print_todo_kanban():
     '''
-    Print all Tddo Cards in Kanban
+    Print all Todo Cards in Kanban
     '''
     database = Database('todo.db')
 
@@ -63,7 +64,7 @@ def print_todo_kanban():
             is_done_1.append(todo)
         else:
             is_done_2.append(todo)
-    
+
     # Alle Spalten in html umwandeln
     kanban = '<div class="todo_kanban">'
 
@@ -87,12 +88,13 @@ def print_todo_kanban():
 
     kanban += '</div>'
 
-    return kanban
+    print(kanban)
 
 
 def perform_action_create(form: cgi.FieldStorage):
     '''
     Created todo entry in database, via url
+    :param: cgi input for create todo
     '''
 
     database = Database('todo.db')
@@ -108,6 +110,7 @@ def perform_action_create(form: cgi.FieldStorage):
 def perform_action_delete(form: cgi.FieldStorage):
     '''
     Delete todo entry in database, via url
+    :param: cgi input to delete todo
     '''
     database = Database('todo.db')
     todo_id = form.getvalue('id')
@@ -116,6 +119,7 @@ def perform_action_delete(form: cgi.FieldStorage):
 def perform_action_update(form: cgi.FieldStorage):
     '''
     Update todo entry in database, via url
+    :param: cgi input to update todo
     '''
     database = Database('todo.db')
     todo_id = form.getvalue('id')
@@ -131,6 +135,7 @@ def perform_action_update(form: cgi.FieldStorage):
 def perform_action_shift(form: cgi.FieldStorage):
     '''
     Sets the status of the todo carte to the next level
+    :param: cgi input to shift todo
     '''
     database = Database('todo.db')
     todo_id = form.getvalue('id')
@@ -143,11 +148,12 @@ def perform_action_shift(form: cgi.FieldStorage):
 def perform_action(form: cgi.FieldStorage):
     '''
     Action from URL validation
+    :param: cgi input action
     '''
     logging.debug('vor perform action, action getValue')
     action = str(form.getvalue('action'))
     logging.debug('nach perform action, action getValue')
-    logging.debug(f'action = {action}')
+    logging.debug('action =  %s', action)
 
     if action == 'create':
         logging.debug('action == create')
@@ -162,10 +168,12 @@ def perform_action(form: cgi.FieldStorage):
 def draw(form: cgi.FieldStorage):
     '''
     Assemble the html document
+    :param: cgi input
     '''
     logging.debug('vor perform action')
     perform_action(form)
     logging.debug('nach perform action')
+
     # For the cgi
     print('Content-Type:text/html\n')
 
@@ -197,8 +205,7 @@ def draw(form: cgi.FieldStorage):
         </div>
     ''')
 
-    print(print_todo_kanban())
-    #print_todo_list()
+    print_todo_kanban()
 
     print ('''
     </body>
