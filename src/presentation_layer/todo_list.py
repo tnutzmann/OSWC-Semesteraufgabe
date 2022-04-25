@@ -103,13 +103,16 @@ def perform_action_create(form: cgi.FieldStorage):
     title = form.getvalue('title')
     content = form.getvalue('content')
     color = form.getvalue('color')
+    is_done = 0
 
-    todo = Todo(title, content, color)
+    todo = Todo(title, content, is_done, color=color)
     logging.debug("todo wurde erstellt:")
     logging.debug(todo)
-
-    database.add_todo(todo)
-    logging.debug("todo zur DB hinzugefügt")
+    try:
+        database.add_todo(todo)
+        logging.debug("todo zur DB hinzugefügt")
+    except Exception as ex:
+        logging.error(ex)
 
 def perform_action_delete(form: cgi.FieldStorage):
     '''
