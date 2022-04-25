@@ -96,16 +96,20 @@ def perform_action_create(form: cgi.FieldStorage):
     Created todo entry in database, via url
     :param: cgi input for create todo
     '''
-
+    logging.debug('perform_action_create aufgerufen')
     database = Database('todo.db')
+    logging.debug('database = Database("todo.db")')
 
     title = form.getvalue('title')
     content = form.getvalue('content')
     color = form.getvalue('color')
 
     todo = Todo(title, content, color)
+    logging.debug("todo wurde erstellt:")
+    logging.debug(todo)
 
     database.add_todo(todo)
+    logging.debug("todo zur DB hinzugefügt")
 
 def perform_action_delete(form: cgi.FieldStorage):
     '''
