@@ -113,10 +113,10 @@ class Todo:
         except NameError:
             raise TypeError('is_done must be an integer.') from NameError
 
-        if -1 <= is_done <= 3:
+        if 0 <= is_done <= 2:
+            self.__is_done = int(is_done)
+        else:
             raise ValueError('is_done must be between 0 and 2 ')
-
-        self.__is_done = int(is_done)
 
     @is_done.deleter
     def is_done(self):

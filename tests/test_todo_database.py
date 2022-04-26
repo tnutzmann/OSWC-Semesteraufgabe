@@ -12,7 +12,12 @@ class TestTodo(unittest.TestCase):
         self.assertAlmostEqual(todo.is_done, True)
         self.assertAlmostEqual(todo.card_id, -1)
         self.assertAlmostEqual(todo.color, 'yellow')
-        
+
+        for i in range(0,2):
+            todo.is_done = i
+            self.assertAlmostEqual(todo.is_done, i)
+
+
         todo2 = Todo('Test2', 'Das ist ein zweiter Test', True, 15)
         self.assertAlmostEqual(todo2.title, 'Test2')
         self.assertAlmostEqual(todo2.content, 'Das ist ein zweiter Test')
@@ -23,6 +28,8 @@ class TestTodo(unittest.TestCase):
         todo = Todo('titel', 'content')
         with self.assertRaises(ValueError):
             todo.title = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+            todo.is_done = -1
+            todo.is_done = 4
 
     def test_area_db(self):
         db = Database('test.db')
