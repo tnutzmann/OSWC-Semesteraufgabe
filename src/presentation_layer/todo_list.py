@@ -165,7 +165,7 @@ def perform_action_shift(form: cgi.FieldStorage):
     logging.debug(todo)
 
     try:
-        todo.is_done += 1 # das tut dinge die es nicht soll!!!
+        todo.is_done = int(todo.is_done) + 1 # das tut dinge die es nicht soll!!!
         logging.debug(f'wert von isDone: {todo.is_done}')
         database.update_todo(todo)
         logging.debug('todo shifted')
