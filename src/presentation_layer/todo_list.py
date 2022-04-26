@@ -95,6 +95,35 @@ def print_todo_kanban():
 
     print(kanban)
 
+def print_create_form():
+    print('''
+        <button class="open-button" onclick="openForm()">+</button>
+
+        <div class="popup" id="create-form">
+            <form action="/cgi/index.cgi" class="todo_create_form">
+                <input type="text" placeholder="Title" name="title" required>
+                <input type="text" placeholder="Content" name="content" required>
+                <select id="colors" name="color">
+                    <option value="yellow">yellow</option>
+                    <option value="green">green</option>
+                    <option value="orange">orange</option>
+                    <option value="purple">purple</option>
+                    <option value="rosa">rosa</option>
+                </select>
+                <input type="submit" class="btn" name="action" value="create">
+            </form>
+            <button class="btn_close" onclick="closeForm()">Close</button>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("create-form").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("create-form").style.display = "none";
+            }
+            </script>
+    ''')
 
 def perform_action_create(form: cgi.FieldStorage):
     '''
@@ -217,21 +246,8 @@ def draw(form: cgi.FieldStorage):
     </head>
     
     <body>
-        <div class="actions_container popup">
-            <form action="/cgi/index.cgi" class="todo_create_form">
-                <input type="text" placeholder="Title" name="title" required>
-                <input type="text" placeholder="Content" name="content" required>
-                <select id="colors" name="color">
-                    <option value="yellow">yellow</option>
-                    <option value="green">green</option>
-                    <option value="orange">orange</option>
-                    <option value="purple">purple</option>
-                    <option value="rosa">rosa</option>
-                </select>
-                <input type="submit" class="button" name="action" value="create">
-            </form>
-        </div>
     ''')
+    print_create_form()
 
     print_todo_kanban()
 

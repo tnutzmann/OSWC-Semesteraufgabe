@@ -13,6 +13,8 @@ body {
     min-width: 100vw;
 }
 
+/* Todo List Styling */
+
 .todo_header {
     font-size: 1rem;
     font-weight: bold;
@@ -68,6 +70,7 @@ body {
     font-size: 2rem;
 }
 
+/* Klassen für die Färbung der Karten */
 .yellow { 
     background-color: #f9f9c7; 
 }
@@ -88,3 +91,27 @@ body {
     background-color: #f0a3f7;
 }
   
+/* Formular Styling */
+
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: #555555;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
