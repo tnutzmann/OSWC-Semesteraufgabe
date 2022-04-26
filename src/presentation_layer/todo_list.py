@@ -141,7 +141,7 @@ def perform_action_update(form: cgi.FieldStorage):
     :param: cgi input to update todo
     '''
     database = Database('todo.db')
-    todo_id = form.getvalue('id')
+    todo_id = int(form.getvalue('id'))
 
     todo: Todo = database.get_todo(todo_id)
 
@@ -157,7 +157,7 @@ def perform_action_shift(form: cgi.FieldStorage):
     :param: cgi input to shift todo
     '''
     database = Database('todo.db')
-    todo_id = form.getvalue('id')
+    todo_id = int(form.getvalue('id'))
     todo: Todo = database.get_todo(todo_id)
 
     if todo.is_done < 2:
