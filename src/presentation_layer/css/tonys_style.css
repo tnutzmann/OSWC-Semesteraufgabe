@@ -79,6 +79,7 @@ body {
     justify-content: space-evenly;
     align-items: stretch;
     flex-direction: row;
+    min-height: 90vh;
 }
 
 .todo_kanban_column {
