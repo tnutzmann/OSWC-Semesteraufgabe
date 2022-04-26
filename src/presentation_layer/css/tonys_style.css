@@ -40,6 +40,13 @@ body {
     position: relative;
 }
 
+.todo:hover, .todo:focus {
+    box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+    transform: scale(1.25);
+    position: relative;
+    z-index: 5;
+}
+
 .todo_kanban {
     margin: 1rem;
     padding: 1rem;
@@ -59,13 +66,6 @@ body {
 .todo_kanban_column_header {
     margin-bottom: 2rem;
     font-size: 2rem;
-}
-
-.todo:hover, .todo:focus {
-    box-shadow: 10px 10px 7px rgba(0,0,0,.7);
-    transform: scale(1.25);
-    position: relative;
-    z-index: 5;
 }
 
 .yellow { 
