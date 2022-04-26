@@ -22,6 +22,7 @@ def todo_to_html(todo: Todo):
         <form>
             <input type="hidden" name="id" value="{todo.card_id}"/>
             <input type="submit" name="action" value="delete"/>
+            <input type="submit" name="action" value="shift"/>
         </form>
     </div>'''
 
@@ -158,11 +159,18 @@ def perform_action_shift(form: cgi.FieldStorage):
     '''
     database = Database('todo.db')
     todo_id = int(form.getvalue('id'))
+    logging.debug(f'todo_id = {todo_id}')
     todo: Todo = database.get_todo(todo_id)
+    logging.debug('todo:')
+    logging.debug(todo)
 
-    if todo.is_done < 2:
-        todo.is_done += 1
+    try:
+        todo.is_done += 1 # das tut dinge die es nicht soll!!!
+        logging.debug(f'wert von isDone: {todo.is_done}')
         database.update_todo(todo)
+        logging.debug('todo shifted')
+    except Exception as ex:
+        logging.error(ex)
 
 def perform_action(form: cgi.FieldStorage):
     '''

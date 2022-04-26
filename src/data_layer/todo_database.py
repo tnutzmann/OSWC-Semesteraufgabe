@@ -26,7 +26,7 @@ class Todo:
                self.__title + '\n' + \
                self.__content + '\n' + \
                self.__color + '\n' + \
-               '\nDone: ' + str(self.__is_done)
+               'Done: ' + str(self.__is_done)
 
     def is_done_to_str(self):
         '''
@@ -306,7 +306,7 @@ class Database:
                     WHERE rowid=?",
                     (todo.title,
                      todo.content,
-                     todo.is_done,
+                     str(todo.is_done),
                      todo.color,
                      str(todo.card_id)))
 
