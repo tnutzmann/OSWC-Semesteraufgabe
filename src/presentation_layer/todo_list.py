@@ -21,8 +21,8 @@ def todo_to_html(todo: Todo):
         <p class="todo_content">{todo.content}</p>
         <form>
             <input type="hidden" name="id" value="{todo.card_id}"/>
-            <input type="submit" name="action" value="delete"/>
-            <input type="submit" name="action" value="shift"/>
+            <input class="btn" type="submit" name="action" value="delete"/>
+            <input class="btn" type="submit" name="action" value="shift"/>
         </form>
     </div>'''
 
