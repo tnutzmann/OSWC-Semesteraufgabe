@@ -19,6 +19,11 @@ def todo_to_html(todo: Todo):
     <div class="todo {todo.color} state_{todo.is_done}" id="todo_{todo.card_id}">
         <h2 class="todo_header">#{todo.card_id} {todo.title}</h2>
         <p class="todo_content">{todo.content}</p>
+        <form>
+            <input type="hidden" name="id" value="{todo.card_id}"/>
+            <input type="submit" name="action" value="delete"/>
+            <input type="submit" name="action" value="shift"/>
+        </form>
     </div>'''
 
 def all_todos_to_html():
@@ -90,31 +95,75 @@ def print_todo_kanban():
 
     print(kanban)
 
+def print_create_form():
+    print('''
+        <button class="open-button" onclick="openForm()">+</button>
+
+        <div class="popup" id="create-form">
+            <form action="/cgi/index.cgi" class="todo_create_form">
+                <input type="text" placeholder="Title" name="title" required>
+                <input type="text" placeholder="Content" name="content" required>
+                <select id="colors" name="color">
+                    <option value="yellow">yellow</option>
+                    <option value="green">green</option>
+                    <option value="orange">orange</option>
+                    <option value="purple">purple</option>
+                    <option value="rosa">rosa</option>
+                </select>
+                <input type="submit" class="btn" name="action" value="create">
+            </form>
+            <button class="btn_close" onclick="closeForm()">Close</button>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("create-form").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("create-form").style.display = "none";
+            }
+            </script>
+    ''')
 
 def perform_action_create(form: cgi.FieldStorage):
     '''
     Created todo entry in database, via url
     :param: cgi input for create todo
     '''
-
+    logging.debug('perform_action_create aufgerufen')
     database = Database('todo.db')
+    logging.debug('database = Database("todo.db")')
 
     title = form.getvalue('title')
     content = form.getvalue('content')
     color = form.getvalue('color')
+    is_done = 0
 
-    todo = Todo(title, content, color)
-
-    database.add_todo(todo)
+    todo = Todo(title, content, is_done, color=color)
+    logging.debug("todo wurde erstellt:")
+    logging.debug(todo)
+    try:
+        database.add_todo(todo)
+        logging.debug("todo zur DB hinzugefügt")
+    except Exception as ex:
+        logging.error(ex)
 
 def perform_action_delete(form: cgi.FieldStorage):
     '''
     Delete todo entry in database, via url
     :param: cgi input to delete todo
     '''
+    logging.debug('perform_action_delete aufgerufen')
     database = Database('todo.db')
-    todo_id = form.getvalue('id')
-    database.remove_todo(todo_id)
+    logging.debug('database = Database("todo.db")')
+
+    todo_id = int(form.getvalue('id'))
+    logging.debug(f'todo_id = {todo_id}')
+    try:
+        database.remove_todo(todo_id)
+        logging.debug('todo removed from DB')
+    except Exception as ex:
+        logging.error(ex)
 
 def perform_action_update(form: cgi.FieldStorage):
     '''
@@ -122,7 +171,7 @@ def perform_action_update(form: cgi.FieldStorage):
     :param: cgi input to update todo
     '''
     database = Database('todo.db')
-    todo_id = form.getvalue('id')
+    todo_id = int(form.getvalue('id'))
 
     todo: Todo = database.get_todo(todo_id)
 
@@ -138,12 +187,19 @@ def perform_action_shift(form: cgi.FieldStorage):
     :param: cgi input to shift todo
     '''
     database = Database('todo.db')
-    todo_id = form.getvalue('id')
+    todo_id = int(form.getvalue('id'))
+    logging.debug(f'todo_id = {todo_id}')
     todo: Todo = database.get_todo(todo_id)
+    logging.debug('todo:')
+    logging.debug(todo)
 
-    if todo.is_done < 2:
-        todo.is_done += 1
+    try:
+        todo.is_done = int(todo.is_done) + 1 # das tut dinge die es nicht soll!!!
+        logging.debug(f'wert von isDone: {todo.is_done}')
         database.update_todo(todo)
+        logging.debug('todo shifted')
+    except Exception as ex:
+        logging.error(ex)
 
 def perform_action(form: cgi.FieldStorage):
     '''
@@ -151,7 +207,7 @@ def perform_action(form: cgi.FieldStorage):
     :param: cgi input action
     '''
     logging.debug('vor perform action, action getValue')
-    action = str(form.getvalue('action'))
+    action = str(form.getvalue('action')).lower()
     logging.debug('nach perform action, action getValue')
     logging.debug('action =  %s', action)
 
@@ -159,6 +215,7 @@ def perform_action(form: cgi.FieldStorage):
         logging.debug('action == create')
         perform_action_create(form)
     elif action == 'delete':
+        logging.debug('action == delete')
         perform_action_delete(form)
     elif action == 'update':
         perform_action_update(form)
@@ -189,21 +246,8 @@ def draw(form: cgi.FieldStorage):
     </head>
     
     <body>
-        <div class="actions_container popup">
-            <form action="/cgi/index.cgi" class="todo_create_form">
-                <input type="text" placeholder="Title" name="title" required>
-                <input type="text" placeholder="Content" name="content" required>
-                <select id="colors" name="color">
-                    <option value="yellow">yellow</option>
-                    <option value="green">green</option>
-                    <option value="orange">orange</option>
-                    <option value="purple">purple</option>
-                    <option value="rosa">rosa</option>
-                </select>
-                <input type="submit" class="button" name="action" value="create">
-            </form>
-        </div>
     ''')
+    print_create_form()
 
     print_todo_kanban()
 
