@@ -96,6 +96,9 @@ def print_todo_kanban():
     print(kanban)
 
 def print_create_form():
+    '''
+    Print the input mask for todo creation
+    '''
     print('''
         <button class="open-button" onclick="openForm()">+</button>
 
@@ -122,7 +125,7 @@ def print_create_form():
             function closeForm() {
                 document.getElementById("create-form").style.display = "none";
             }
-            </script>
+        </script>
     ''')
 
 def perform_action_create(form: cgi.FieldStorage):
@@ -145,7 +148,7 @@ def perform_action_create(form: cgi.FieldStorage):
     try:
         database.add_todo(todo)
         logging.debug("todo zur DB hinzugefügt")
-    except Exception as ex:
+    except ValueError as ex:
         logging.error(ex)
 
 def perform_action_delete(form: cgi.FieldStorage):
@@ -158,11 +161,12 @@ def perform_action_delete(form: cgi.FieldStorage):
     logging.debug('database = Database("todo.db")')
 
     todo_id = int(form.getvalue('id'))
-    logging.debug(f'todo_id = {todo_id}')
+    logging.debug('todo_id = %s', todo_id)
+
     try:
         database.remove_todo(todo_id)
         logging.debug('todo removed from DB')
-    except Exception as ex:
+    except ValueError as ex:
         logging.error(ex)
 
 def perform_action_update(form: cgi.FieldStorage):
@@ -188,17 +192,17 @@ def perform_action_shift(form: cgi.FieldStorage):
     '''
     database = Database('todo.db')
     todo_id = int(form.getvalue('id'))
-    logging.debug(f'todo_id = {todo_id}')
+    logging.debug('todo_id = %s', todo_id)
     todo: Todo = database.get_todo(todo_id)
     logging.debug('todo:')
     logging.debug(todo)
 
     try:
-        todo.is_done = int(todo.is_done) + 1 # das tut dinge die es nicht soll!!!
-        logging.debug(f'wert von isDone: {todo.is_done}')
+        todo.is_done += 1
+        logging.debug('wert von isDone: %s', todo.is_done)
         database.update_todo(todo)
         logging.debug('todo shifted')
-    except Exception as ex:
+    except ValueError as ex:
         logging.error(ex)
 
 def perform_action(form: cgi.FieldStorage):
