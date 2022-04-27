@@ -1,1 +1,0 @@
-Hier wird die Übersetzung vom Presentationlayer zum Datalayer vorgenommen (Service).
