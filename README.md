@@ -1,28 +1,31 @@
 # OSWC-Semesteraufgabe
 
-## Beschreibung
-Unser Semesteraufgabe für das Modul Betriebssysteme und Web-Computing. Eine TODO-List in Python als CGI-Script.
+![screenshot](img/screenshot.png)
 
-## Ziele
-- [Three tier architecture](https://www.youtube.com/watch?v=n4J30QEFjDk)
-- [Software Tests](https://www.youtube.com/watch?v=DhUpxWjOhME&t=115s)
+[![Python Tests](https://github.com/tnutzmann/OSWC-Semesteraufgabe/actions/workflows/python.yml/badge.svg)](https://github.com/tnutzmann/OSWC-Semesteraufgabe/actions/workflows/python.yml)
+[![Html Validation](https://github.com/tnutzmann/OSWC-Semesteraufgabe/actions/workflows/html.yml/badge.svg)](https://github.com/tnutzmann/OSWC-Semesteraufgabe/actions/workflows/html.yml)
 
+## Description
+Our semester assignment for the Operating Systems and Web Computing module. It is a minimalistic Kanban webapp.
+The saving is done in a SQLite database. The output is created by a CGI Python script.
 
-## Deployment
-Wir verwenden für das testen Docker.
+## Install
+Use git and docker to create this project.
 
-### Build
-Zum bauen wird folgender Commad benutzt (Im Verzeichnis mit dem Dockerfile): `sudo docker build -t cgi .`
+1. Clone the repo: `git clone https://github.com/tnutzmann/OSWC-Semesteraufgabe.git`
+2. Switch to the directory: `cd OSWC-Semesteraufgabe`
+3. Build the docker: `sudo docker build -t cgi .`
+4. Run the application: `sudo docker run -dit -p 8080:80 cgi`
+5. Now open in browser: `firefox http://localhost:8080/cgi/index.cgi`
 
-### Testing
-Commad um Ergebnis zu testen:
-`sudo docker run -dit -p 8080:80 cgi; firefox http://localhost:8080/cgi/index.cgi`
+## Unittests
+In the repo folder:: `python3 -m tests.test_todo_database`
 
-### Debuging 
-Um im Docker Fehler zu suchen folgendes ausführen: `sudo docker run -it cgi bash`
-Besonders hilfreich für debuging war `/usr/sbin/apache2` auszuführen.
-Und `docker ps` braucht man auch sehr oft.
+## URL PATHS
+ - Create: `/cgi/index.cgi?title=foo&content=bar&color=green&action=create`
+ - Delete: `/cgi/index.cgi?id=3&action=delete`
+ - Shift: `/cgi/index.cgi?id=5&action=shift`
 
-## Unittest
-
-Im Repo Ordner: `python3 -m tests.test_todo_database`
+## Authors
+- [Sebastian Feustel 20224832](https://github.com/53845714nF)
+- [Tony Nutzmann ](https://github.com/tnutzmann)
