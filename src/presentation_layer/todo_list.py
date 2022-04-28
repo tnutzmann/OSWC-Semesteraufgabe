@@ -98,10 +98,9 @@ def print_todo_kanban():
 def print_create_form():
     '''
     Print the input mask for todo creation
+    Button to Display it has to be added seperatly!!!
     '''
     print('''
-        <button class="open-button" onclick="openForm()">+</button>
-
         <div class="popup" id="create-form">
             <form action="/cgi/index.cgi" class="todo_create_form">
                 <input type="text" placeholder="Title" name="title" required>
@@ -115,7 +114,7 @@ def print_create_form():
                 </select>
                 <input type="submit" class="btn" name="action" value="create">
             </form>
-            <button class="btn_close" onclick="closeForm()">Close</button>
+            <button class="btn" onclick="closeForm()">Close</button>
         </div>
         <script>
             function openForm() {
@@ -248,14 +247,18 @@ def draw(form: cgi.FieldStorage):
         <link rel="stylesheet" href="presentation_layer/css/tonys_style.css">
         <title>TODO List</title>
     </head>
-    
     <body>
+        <header class="header">
+            <h1 class="heading">TODO-List</h1>
+            <button class="btn" onclick="openForm()">new</button>
+        </header>
+        <div class="content">
     ''')
     print_create_form()
-
     print_todo_kanban()
 
     print ('''
+        </div>
     </body>
     </html>
     ''')
