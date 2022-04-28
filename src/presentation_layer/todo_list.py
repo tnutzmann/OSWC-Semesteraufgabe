@@ -250,7 +250,7 @@ def draw(form: cgi.FieldStorage):
     <body>
         <header class="header">
             <h1 class="heading">TODO-List</h1>
-            <button class="btn" onclick="openForm()">new</button>
+            <button class="create-btn" onclick="openForm()">+</button>
         </header>
         <div class="content">
     ''')
