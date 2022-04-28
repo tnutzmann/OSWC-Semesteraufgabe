@@ -28,4 +28,4 @@ In the repo folder:: `python3 -m tests.test_todo_database`
 
 ## Authors
 - [Sebastian Feustel 20224832](https://github.com/53845714nF)
-- [Tony Nutzmann ](https://github.com/tnutzmann)
+- [Tony Nutzmann 20224463](https://github.com/tnutzmann)
