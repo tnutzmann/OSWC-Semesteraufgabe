@@ -21,8 +21,8 @@ def todo_to_html(todo: Todo):
         <p class="todo_content">{todo.content}</p>
         <form>
             <input type="hidden" name="id" value="{todo.card_id}"/>
-            <input class="btn" type="submit" name="action" value="delete"/>
-            <input class="btn" type="submit" name="action" value="shift"/>
+            <input class="btn" type="submit" name="action" value="Delete"/>
+            <input class="btn" type="submit" name="action" value="Shift"/>
         </form>
     </div>'''
 
@@ -103,6 +103,7 @@ def print_create_form():
     print('''
         <div class="popup" id="create-form">
             <form action="/cgi/index.cgi" class="todo_create_form">
+                <h2>Create new TODO</h2>
                 <input type="text" placeholder="Title" name="title" required>
                 <input type="text" placeholder="Content" name="content" required>
                 <select id="colors" name="color">
@@ -112,9 +113,9 @@ def print_create_form():
                     <option value="purple">purple</option>
                     <option value="rosa">rosa</option>
                 </select>
-                <input type="submit" class="btn" name="action" value="create">
+                <input type="submit" class="btn" name="action" value="Create">
+                <button class="btn" onclick="closeForm()">Close</button>
             </form>
-            <button class="btn" onclick="closeForm()">Close</button>
         </div>
         <script>
             function openForm() {
