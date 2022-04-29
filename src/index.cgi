@@ -5,9 +5,15 @@ Erster Versuch eines CGI Scriptes
 
 import cgi
 import presentation_layer.todo_list as tl
+import logging
+
+logging.basicConfig( level=logging.DEBUG, filename='todo_cgi.log')
 
 form = cgi.FieldStorage()
-tl.draw(form)
+try:
+    tl.draw(form)
+except ValueError as ex:
+        logging.error(ex)
 
 
 
