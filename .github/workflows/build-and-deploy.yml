@@ -1,11 +1,9 @@
-name: CI
+name: Digitalocean
 
-# 1
-# Controls when the workflow will run
+
 on:
-  # Triggers the workflow on push events but only for the master branch
   push:
-    branches: [ master ]
+    branches: main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -66,4 +64,5 @@ jobs:
             docker run -d \
             --restart always \
             --name $(echo $IMAGE_NAME) \
+            --port 80:80 \
             $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
