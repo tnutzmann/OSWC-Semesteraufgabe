@@ -15,10 +15,10 @@ jobs:
         run: sudo apt install python-dev-is-python3
 
       - name: Create Docs with pydoc   
-        run: cd src; pwd; pydoc -w data_layer/todo_database.py; pydoc -w presentation_layer/todo_list.py
+        run: cd src; pydoc -w data_layer/todo_database.py; pydoc -w presentation_layer/todo_list.py
       
       - name: Output docs
         uses: actions/upload-artifact@v3
         with:
           name: docs
-          path: src/todo_database.html, 
+          path: todo_database.html, todo_list.html
