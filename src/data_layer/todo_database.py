@@ -224,7 +224,7 @@ class Database:
         Fügt ein Todo Item Objekt der Datenbank hinzu.
         :param: todo todo: Ein Objekt der Klasse todo.
         '''
-        if (todo.card_id == -1):
+        if todo.card_id == -1:
             con = sqlite3.connect(self.__db_name)
             cur = con.cursor()
 
@@ -239,7 +239,7 @@ class Database:
         Löscht Todo aus der Tabelle anhand der Id eines Todo Items.
         :param: int id: Die Id des Todo Item Objekts.
         '''
-        if (card_id >= 0):
+        if card_id >= 0:
             con = sqlite3.connect(self.__db_name)
             cur = con.cursor()
 
