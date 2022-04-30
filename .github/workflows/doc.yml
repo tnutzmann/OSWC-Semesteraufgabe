@@ -1,0 +1,24 @@
+name: Html Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  html:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+
+      - name: INstall pydoc
+        run: sudo apt install python-dev-is-python3; cd src
+
+      - name: Create index.html    
+        run: pydoc -w data_layer/todo_database.py; pydoc -w presentation_layer/todo_list.py
+      
+      - name: Output docs
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: src/todo_database.html, 

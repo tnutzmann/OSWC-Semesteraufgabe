@@ -21,7 +21,7 @@ Use git and docker to create this project.
 ## Unittests
 In the repo folder:: `python3 -m tests.test_todo_database`
 
-## URL PATHS
+## URL Paths
  - Create: `/cgi/index.cgi?title=foo&content=bar&color=green&action=create`
  - Delete: `/cgi/index.cgi?id=3&action=delete`
  - Shift: `/cgi/index.cgi?id=5&action=shift`

@@ -30,7 +30,7 @@ class Todo:
 
     def is_done_to_str(self):
         '''
-        :return the String od is_done
+        :return the String of is_done
         '''
         switcher = {
             0: 'TO DO',
@@ -195,8 +195,8 @@ class Database:
 
     def init_todo_table(self):
         '''
-        Erstellt eine Tabelle wenn sie noch nicht existiert.
-        Diese enthält hat die Spalten: titel, content und is_done
+        Creates a table if it does not already exist.
+        This contains has the columns: title, content and is_done
         '''
         con = sqlite3.connect(self.__db_name)
         cur = con.cursor()
@@ -210,9 +210,9 @@ class Database:
     @classmethod
     def query_to_todo(cls, query: list):
         '''
-        Wandelt eine Query list in ein Objekt.
-        :param list query: Liste aus einer Datenbank abfrage.
-        :return todo todo: Liste aus todo Objekten.
+        Converts a query list into an object.
+        :param list query: Query list from a database.
+        :return todo: List from todo objects.
         '''
         todo = []
         for i in query:
@@ -221,8 +221,8 @@ class Database:
 
     def add_todo(self, todo: Todo):
         '''
-        Fügt ein Todo Item Objekt der Datenbank hinzu.
-        :param: todo todo: Ein Objekt der Klasse todo.
+        Adds a Todo Item object to the database.
+        :param todo: An object of the class todo.
         '''
         if todo.card_id == -1:
             con = sqlite3.connect(self.__db_name)
@@ -236,8 +236,8 @@ class Database:
 
     def remove_todo(self, card_id: int):
         '''
-        Löscht Todo aus der Tabelle anhand der Id eines Todo Items.
-        :param: int id: Die Id des Todo Item Objekts.
+        Deletes todo from the table based on the id of a todo item.
+        :param int id: The id of the todo item object.
         '''
         if card_id >= 0:
             con = sqlite3.connect(self.__db_name)
@@ -253,8 +253,8 @@ class Database:
 
     def get_all_todos(self):
         '''
-         Gibt alle todos aus der Datenbank zurück.
-        :return: todo_list: Gibt eine Liste von Todo Objekten zurück.
+         Returns all todos from the database.
+        :return: todo_list: Returns a list of todo objects.
         '''
         con = sqlite3.connect(self.__db_name)
         cur = con.cursor()
@@ -271,9 +271,9 @@ class Database:
 
     def get_todo(self, card_id: int):
         '''
-        Gibt ein Todo Item anhand seiner Id zurück.
-        :param int id: Die Id des Todo Objekts.
-        :return todo_list: Gibt ein Objekt der Klasse.
+        Returns a todo item by its id.
+        :param int id: The id of the todo object.
+        :return todo_list: Returns an object of the class.
         '''
         con = sqlite3.connect(self.__db_name)
         cur = con.cursor()
@@ -290,9 +290,9 @@ class Database:
 
     def update_todo(self, todo: Todo):
         '''
-        Verändert in bestehendes todo item.
-        :param int id: Die Id des Todo Objekts.
-        :return todo_list: Gibt ein Objekt der Klasse.
+        Changed to existing todo item.
+        :param int id: The id of the todo object.
+        :return todo_list: Returns an object of the class.
         '''
         con = sqlite3.connect(self.__db_name)
         cur = con.cursor()
