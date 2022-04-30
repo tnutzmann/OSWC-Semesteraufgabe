@@ -21,4 +21,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: docs
-          path: src/todo_database.html, src/todo_list.html
+          path: src/*.html
