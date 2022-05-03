@@ -9,6 +9,16 @@
 Our semester assignment for the Operating Systems and Web Computing module. It is a minimalistic Kanban webapp.
 The saving is done in a SQLite database. The output is created by a CGI Python script.
 
+3 actions can be performed:
+- CREATE: 
+    - press the button in the upper right corner
+    - type in Title, Content (description) and select a Color
+    - press create to submit
+- SHIFT:
+    - moves the todo-item to the next column
+- DELETE:
+    - removes the todo-item from the list
+
 [Demosystem](http://46.101.162.58/cgi/index.cgi)
 
 ## Install
@@ -28,10 +38,8 @@ In the repo folder:: `python3 -m tests.test_todo_database`
  - Delete: `/cgi/index.cgi?id=3&action=delete`
  - Shift: `/cgi/index.cgi?id=5&action=shift`
 
-## Internal URLS
-- Create: http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi?title=foo&content=bar&color=green&action=create
-- Delete: http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi?id=3&action=delete
-- Shift: http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi?id=5&action=shift
+## Internal URL
+    http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi
 
 ## Authors
 - [Sebastian Feustel 20224832](https://github.com/53845714nF)
