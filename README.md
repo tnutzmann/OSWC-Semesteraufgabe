@@ -39,7 +39,7 @@ In the repo folder:: `python3 -m tests.test_todo_database`
  - Shift: `/cgi/index.cgi?id=5&action=shift`
 
 ## Internal URL
-    http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi
+[Link to pan](http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi)
 
 ## Authors
 - [Sebastian Feustel 20224832](https://github.com/53845714nF)
