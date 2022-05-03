@@ -102,7 +102,7 @@ def print_create_form():
     '''
     print('''
         <div class="popup" id="create-form">
-            <form action="/cgi/index.cgi" class="todo_create_form">
+            <form class="todo_create_form">
                 <h2>Create new TODO</h2>
                 <input type="text" placeholder="Title" name="title" required>
                 <input type="text" placeholder="Content" name="content" required>
