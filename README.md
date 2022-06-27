@@ -19,8 +19,6 @@ The saving is done in a SQLite database. The output is created by a CGI Python s
 - DELETE:
     - removes the todo-item from the list
 
-[Demosystem](http://46.101.162.58/cgi/index.cgi)
-
 ## Install
 Use git and docker to create this project.
 
