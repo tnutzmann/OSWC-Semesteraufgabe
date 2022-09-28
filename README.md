@@ -31,6 +31,12 @@ Use git and docker to create this project.
 ## Unittests
 In the repo folder:: `python3 -m tests.test_todo_database`
 
+## Podman to Deploy
+```
+sudo podman pull ghcr.io/53845714nf/oswc-semesteraufgabe/oswc-todo
+sudo podman run -d -p 80:80 oswc-semesteraufgabe/oswc-todo
+```
+
 ## URL Paths
  - Create: `/cgi/index.cgi?title=foo&content=bar&color=green&action=create`
  - Delete: `/cgi/index.cgi?id=3&action=delete`
