@@ -1,0 +1,13 @@
+name: Build Podman Flask container
+on:
+  - push
+
+    steps:
+        - uses: actions/checkout@v2
+
+        - name: Build and Publish head Docker image
+          uses: VaultVulp/gp-docker-action@1.1.12
+          with:
+              github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+              image-name: oswc-todo 
+              image-tag: latest 
