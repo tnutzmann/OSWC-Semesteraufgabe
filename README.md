@@ -36,9 +36,6 @@ In the repo folder:: `python3 -m tests.test_todo_database`
  - Delete: `/cgi/index.cgi?id=3&action=delete`
  - Shift: `/cgi/index.cgi?id=5&action=shift`
 
-## Internal URL
-[Link to pan](http://pan.th-brndenburg.de/~nutzmann/cgi-bin/todo/index.cgi)
-
 ## Authors
 - [Sebastian Feustel 20224832](https://github.com/53845714nF)
 - [Tony Nutzmann 20224463](https://github.com/tnutzmann)
