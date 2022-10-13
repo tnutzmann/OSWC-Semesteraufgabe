@@ -20,6 +20,18 @@ The saving is done in a SQLite database. The output is created by a CGI Python s
     - removes the todo-item from the list
 
 ## Install
+
+### Install with Docker 
+```
+docker pull ghcr.io/53845714nf/oswc-semesteraufgabe/oswc-todo
+```
+
+### Install without Docker 
+```
+curl -sSL https://raw.githubusercontent.com/53845714nF/OSWC-Semesteraufgabe/main/install.sh | sudo bash
+```
+
+### For development
 Use git and docker to create this project.
 
 1. Clone the repo: `git clone https://github.com/tnutzmann/OSWC-Semesteraufgabe.git`
@@ -30,12 +42,6 @@ Use git and docker to create this project.
 
 ## Unittests
 In the repo folder:: `python3 -m tests.test_todo_database`
-
-## Podman to Deploy
-```
-sudo podman pull ghcr.io/53845714nf/oswc-semesteraufgabe/oswc-todo
-sudo podman run -d -p 80:80 oswc-semesteraufgabe/oswc-todo
-```
 
 ## URL Paths
  - Create: `/cgi/index.cgi?title=foo&content=bar&color=green&action=create`
