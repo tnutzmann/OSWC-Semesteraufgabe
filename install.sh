@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-apt -y update && apt -y upgrade
-apt -y install apache2 apache2-utils python3 && apt-get clean -y
+export DEBIAN_FRONTEND=noninteractive
+apt -yq update && apt -yq upgrade
+apt -yq install apache2 apache2-utils python3 && apt-get clean -yq
 
 a2enmod cgi
 
