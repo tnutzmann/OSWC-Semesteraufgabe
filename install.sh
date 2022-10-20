@@ -21,4 +21,5 @@ chmod 705 /var/www/html/cgi/index.cgi
 chmod 666 /var/www/html/cgi/todo_cgi.log
 chmod 666 /var/www/html/cgi/todo.db
 
+systemctl enable apache2
 systemctl restart apache2
